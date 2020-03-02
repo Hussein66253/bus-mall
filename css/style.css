@@ -39,7 +39,7 @@ aside{
     float: left;
     background-color: cadetblue;
     width: 20%;
-    height: 500px;
+    height: 525px;
     border: 5px solid burlywood;
     line-height: 25px;
     color: darkred;
@@ -48,7 +48,7 @@ aside{
 #proudct-selction{
     float: right;
     width: 80%;
-    height: 500px;
+    height: 525px;
    
  }
 
@@ -60,12 +60,14 @@ aside{
     margin: 5px;
     border-radius: 5px;
   }
+  #myChart{
+    margin-bottom: 40px;
+  }
   footer{
       background-color: royalblue;
       clear: both;
       position: relative;
       height: 20px;
-      margin-top: -80px;
       text-align: center;
 
   }

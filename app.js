@@ -91,7 +91,7 @@ proudctSelction.addEventListener('click', handleClickOnproudct);
 var totalClicks = 0;
 function handleClickOnproudct(event) {
     if (totalClicks < 25) {
-        // alert("let see what is next!!");
+        alert("let see what is next!!");
         if (event.target.id !== 'proudctSelction') {
             console.log('hello',leftProduct);
             
@@ -118,6 +118,8 @@ function handleClickOnproudct(event) {
         alert("Thanks for helping us you have reached the max attempts (25 votes) ")
         proudctSelction.removeEventListener('click', handleClickOnproudct);
         selctionsResult()
+        chartFun();
+
     }
 }
 
@@ -136,4 +138,79 @@ function selctionsResult() {
 //helper functions
 function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+// visual representation of how many times a product was clicked so that we can visually analyze the results.
+function chartFun (){
+    var clicksArr = [];
+for ( var i = 0 ; i <Product.all.length; i++){
+    clicksArr.push(Product.all[i].clicks);
+     
+    }
+    console.log('kdddddd',clicksArr);
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels:  productName,
+            datasets: [{
+                label: '# of Votes',
+                data: clicksArr,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(69, 45, 200, 0.2)',
+                    'rgba(197, 99, 75, 0.2)',
+                    'rgba(153, 102, 25, 0.2)',
+                    'rgba(85, 102, 255, 0.2)',
+                    'rgba(41, 102, 57, 0.2)',
+                    'rgba(178, 58, 255, 0.2)',
+                    'rgba(78, 25, 255, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(57, 78, 95, 0.2)',
+                    'rgba(78, 147, 247, 0.2)',
+                    'rgba(1, 15, 157, 0.2)',
+                    'rgba(47, 92, 24, 0.2)',
+                    'rgba(57, 134, 102, 0.2)',
+                    'rgba(14, 14, 14, 0.2)',
+                    'rgba(25, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
 }
