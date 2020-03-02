@@ -1,0 +1,70 @@
+
+header {
+    background-color: rgb(51, 92, 7);
+    height: 100px;
+    text-align: center;
+    border: 5px solid coral;
+    color: white;
+    margin-bottom: 1%;
+  }
+  h1{
+    color: rgb(16, 17, 17);
+    font-size: 25px;
+    font-family: fantasy;
+    margin-top: 20px;
+  }
+  header nav ul {
+    list-style: none;
+  }
+  header nav ul li {
+    display: inline-block;
+    padding: 10px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgb(4, 22, 22);
+  }
+  h2{
+    margin-bottom: 10px;
+
+  }
+  #tit-img{
+      width: 40px;
+      height: 40px;
+  }
+  #prefer{
+    color: rgb(9, 201, 201);
+    font-size: 25px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+aside{
+    float: left;
+    background-color: cadetblue;
+    width: 20%;
+    height: 388px;
+    border: 5px solid burlywood;
+
+
+}
+#proudct-selction{
+    float: right;
+    width: 80%;
+    height: 388px;
+   
+ }
+
+  img {
+    width: 250px;
+    height: 250px;
+    border: 5px solid burlywood;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+  }
+  footer{
+      background-color: cadetblue;
+      clear: both;
+      position: relative;
+      height: 20px;
+      margin-top: -80px;
+      text-align: center;
+
+  }
