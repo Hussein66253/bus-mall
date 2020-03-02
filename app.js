@@ -29,104 +29,111 @@ var imageSection = document.querySelector('#proudctSelction')
 
 
 // adding src,alt and title to the leftImage
-leftImage.setAttribute('src',`images/${productName[14]}`);
-leftImage.setAttribute('alt',productName[14]);
-leftImage.setAttribute('title',productName[14]);
+leftImage.setAttribute('src', `images/${productName[14]}`);
+leftImage.setAttribute('alt', productName[14]);
+leftImage.setAttribute('title', productName[14]);
 // adding src,alt and title to the midlleImage
-midlleImage.setAttribute('src',`images/${productName[17]}`);
-midlleImage.setAttribute('alt',productName[17]);
-midlleImage.setAttribute('title',productName[17]);
+midlleImage.setAttribute('src', `images/${productName[17]}`);
+midlleImage.setAttribute('alt', productName[17]);
+midlleImage.setAttribute('title', productName[17]);
 // adding src,alt and title to the midlleImage
-rightImage.setAttribute('src',`images/${productName[2]}`);
-rightImage.setAttribute('alt',productName[2]);
-rightImage.setAttribute('title',productName[2]);
+rightImage.setAttribute('src', `images/${productName[2]}`);
+rightImage.setAttribute('alt', productName[2]);
+rightImage.setAttribute('title', productName[2]);
 
 // create constructor function for the product Name
-function Product (name){
+function Product(name) {
     this.name = name;
     this.clicks = 0;
     this.views = 0;
     this.imagePath = `images/${this.name}`;
     // console.log(this.imagePath);
-    
+
 
     Product.all.push(this);
 }
- Product.all = [];
+Product.all = [];
 
- // instantiate objects for all the product one shot
- for ( var i = 0 ; i < productName.length ; i++){
-     new Product(productName[i])
- }
+// instantiate objects for all the product one shot
+for (var i = 0; i < productName.length; i++) {
+    new Product(productName[i])
+}
 // render 3 random Product
-var leftProduct , midlleProduct , rightProduct;
-function render(){
-    leftProduct = Product.all[randomNumber(0,Product.all.length-1)];
+var leftProduct, midlleProduct, rightProduct;
+function render() {
+    leftProduct = Product.all[randomNumber(0, Product.all.length - 1)];
     // console.log(leftProduct);
-    midlleProduct = Product.all[randomNumber(0,Product.all.length-1)];
-    rightProduct = Product.all[randomNumber(0,Product.all.length-1)];
+    midlleProduct = Product.all[randomNumber(0, Product.all.length - 1)];
+    rightProduct = Product.all[randomNumber(0, Product.all.length - 1)];
     // adding src,alt and title to the leftImage
-     if(leftProduct !== midlleProduct && rightProduct){
-        if(midlleProduct !== leftProduct && rightProduct){
-            if(rightProduct !== leftProduct && midlleProduct){
-                leftImage.setAttribute('src',leftProduct.imagePath);
+    if (leftProduct !== midlleProduct && leftProduct !== rightProduct) {
+        if (midlleProduct !== leftProduct && midlleProduct !== rightProduct) {
+            if (rightProduct !== leftProduct && rightProduct !== midlleProduct) {
+                leftImage.setAttribute('src', leftProduct.imagePath);
                 // console.log(leftProduct);
-                leftImage.setAttribute('alt',leftProduct.name);
-                leftImage.setAttribute('title',leftProduct.name);
+                leftImage.setAttribute('alt', leftProduct.name);
+                leftImage.setAttribute('title', (leftProduct.name).split(".", 1));
                 // adding src,alt and title to the midlleImage
-                midlleImage.setAttribute('src',midlleProduct.imagePath);
-                midlleImage.setAttribute('alt',midlleProduct.name);
-                midlleImage.setAttribute('title',midlleProduct.name);
+                midlleImage.setAttribute('src', midlleProduct.imagePath);
+                midlleImage.setAttribute('alt', midlleProduct.name);
+                midlleImage.setAttribute('title', (midlleProduct.name).split(".", 1));
                 // adding src,alt and title to the midlleImage
-                rightImage.setAttribute('src',rightProduct.imagePath);
-                rightImage.setAttribute('alt',rightProduct.name);
-                rightImage.setAttribute('title',rightProduct.name);
+                rightImage.setAttribute('src', rightProduct.imagePath);
+                rightImage.setAttribute('alt', rightProduct.name);
+                rightImage.setAttribute('title', (rightProduct.name).split(".", 1));
             }
         }
-    }   
+    }
 }
 render();
 // add the event listener to render new images
-proudctSelction.addEventListener('click',handleClickOnproudct);
+proudctSelction.addEventListener('click', handleClickOnproudct);
 var totalClicks = 0;
-function handleClickOnproudct(event){
-    if (totalClicks < 25 ){
+function handleClickOnproudct(event) {
+    if (totalClicks < 25) {
         // alert("let see what is next!!");
-    if (leftImage.imagePath!==midlleImage.imagePath ||  midlleImage.imagePath!==rightImage.imagePath || leftImage.imagePath!==rightImage.imagePath){
-        if(event.target.id !== 'proudctSelction'){
-            if(event.target.id === 'leftImage'){
-                leftImage.totalClicks++;
-                leftProduct.views++;
-                console.log(leftImage.Clicks);
-                console.log(leftProduct.views);
-                
+        if (event.target.id !== 'proudctSelction') {
+            console.log('hello',leftProduct);
+            
+            if (event.target.id === 'left-images') {
+                leftProduct.clicks++;
+                console.log(leftProduct.clicks);
                 
             }
+            else if (event.target.id === 'midlle-images') {
+                midlleProduct.clicks++;
+            }
+            else if (event.target.id === 'right-images') {
+                rightProduct.clicks++;
+            }
+            totalClicks++;
+            leftProduct.views++;
+            midlleProduct.views++;
+            rightProduct.views++;
+
+            render();
         }
-        
-        
+        // console.log(totalClicks);
+    } else {
+        alert("Thanks for helping us you have reached the max attempts (25 votes) ")
+        proudctSelction.removeEventListener('click', handleClickOnproudct);
+        selctionsResult()
     }
-    render();
-
-    // console.log(totalClicks);
-    
-    // leftProduct.views++;
-    // console.log(leftProduct);
-    
-    // midlleProduct.views++;
-    // rightProduct.views++;
-} else  {
-    alert("Thanks for helping us you have reached the max attempts (25 votes) ")
-        proudctSelction.removeEventListener('click',handleClickOnproudct);
-
-}
 }
 
-
+function selctionsResult() {
+    var ulRe = document.getElementById('Selctions')
+    for (var i = 0; i < Product.all.length; i++) {
+        var liRe = document.createElement('li');
+        ulRe.appendChild(liRe)
+        Product.all[i].name = (Product.all[i].name).split(".", 1);
+        liRe.textContent = `${Product.all[i].name} has ${Product.all[i].clicks} clicks and ${Product.all[i].views} views`
+    }
+}
 
 
 
 //helper functions
 function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+}

@@ -39,15 +39,16 @@ aside{
     float: left;
     background-color: cadetblue;
     width: 20%;
-    height: 388px;
+    height: 500px;
     border: 5px solid burlywood;
-
-
+    line-height: 25px;
+    color: darkred;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 #proudct-selction{
     float: right;
     width: 80%;
-    height: 388px;
+    height: 500px;
    
  }
 
@@ -60,7 +61,7 @@ aside{
     border-radius: 5px;
   }
   footer{
-      background-color: cadetblue;
+      background-color: royalblue;
       clear: both;
       position: relative;
       height: 20px;
