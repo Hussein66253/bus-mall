@@ -60,6 +60,7 @@ for (var i = 0; i < productName.length; i++) {
 }
 // render 3 random Product
 var leftProduct, midlleProduct, rightProduct;
+var imagesShowed =[];
 function render() {
     leftProduct = Product.all[randomNumber(0, Product.all.length - 1)];
     // console.log(leftProduct);
@@ -69,6 +70,17 @@ function render() {
     if (leftProduct !== midlleProduct && leftProduct !== rightProduct) {
         if (midlleProduct !== leftProduct && midlleProduct !== rightProduct) {
             if (rightProduct !== leftProduct && rightProduct !== midlleProduct) {
+                while (imagesShowed.includes(leftProduct)) {
+                    leftProduct = Product.all[randomNumber(0, Product.all.length - 1)];
+                }
+                    while (imagesShowed.includes(midlleProduct)) {
+                        midlleProduct = Product.all[randomNumber(0, Product.all.length - 1)];
+                    }
+                         while (imagesShowed.includes(rightProduct)) {
+                            rightProduct = Product.all[randomNumber(0, Product.all.length - 1)];
+                        }
+                            
+
                 leftImage.setAttribute('src', leftProduct.imagePath);
                 // console.log(leftProduct);
                 leftImage.setAttribute('alt', leftProduct.name);
@@ -91,7 +103,7 @@ proudctSelction.addEventListener('click', handleClickOnproudct);
 var totalClicks = 0;
 function handleClickOnproudct(event) {
     if (totalClicks < 25) {
-        alert("let see what is next!!");
+        // alert("let see what is next!!");
         if (event.target.id !== 'proudctSelction') {
             console.log('hello',leftProduct);
             
@@ -144,8 +156,11 @@ function chartFun (){
     var clicksArr = [];
 for ( var i = 0 ; i <Product.all.length; i++){
     clicksArr.push(Product.all[i].clicks);
-     
     }
+    var viewsArr = [];
+for ( var v = 0 ; v <Product.all.length; v++){
+    viewsArr.push(Product.all[v].views);
+}
     console.log('kdddddd',clicksArr);
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
@@ -200,8 +215,61 @@ for ( var i = 0 ; i <Product.all.length; i++){
                     'rgba(255, 99, 132, 1)',
 
                 ],
+            
                 borderWidth: 1
-            }]
+            },
+            {
+                label: '# of views',
+                data: viewsArr,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(69, 45, 200, 0.2)',
+                    'rgba(197, 99, 75, 0.2)',
+                    'rgba(153, 102, 25, 0.2)',
+                    'rgba(85, 102, 255, 0.2)',
+                    'rgba(41, 102, 57, 0.2)',
+                    'rgba(178, 58, 255, 0.2)',
+                    'rgba(78, 25, 255, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(57, 78, 95, 0.2)',
+                    'rgba(78, 147, 247, 0.2)',
+                    'rgba(1, 15, 157, 0.2)',
+                    'rgba(47, 92, 24, 0.2)',
+                    'rgba(57, 134, 102, 0.2)',
+                    'rgba(14, 14, 14, 0.2)',
+                    'rgba(25, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 99, 132, 1)',
+
+                ],
+            
+                borderWidth: 1
+            }
+        ]
         },
         options: {
             scales: {
