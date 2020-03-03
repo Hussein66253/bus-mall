@@ -72,15 +72,15 @@ function render() {
                 leftImage.setAttribute('src', leftProduct.imagePath);
                 // console.log(leftProduct);
                 leftImage.setAttribute('alt', leftProduct.name);
-                leftImage.setAttribute('title', (leftProduct.name).split(".", 1));
+                leftImage.setAttribute('title', (leftProduct.name));
                 // adding src,alt and title to the midlleImage
                 midlleImage.setAttribute('src', midlleProduct.imagePath);
                 midlleImage.setAttribute('alt', midlleProduct.name);
-                midlleImage.setAttribute('title', (midlleProduct.name).split(".", 1));
+                midlleImage.setAttribute('title', (midlleProduct.name));
                 // adding src,alt and title to the midlleImage
                 rightImage.setAttribute('src', rightProduct.imagePath);
                 rightImage.setAttribute('alt', rightProduct.name);
-                rightImage.setAttribute('title', (rightProduct.name).split(".", 1));
+                rightImage.setAttribute('title', (rightProduct.name));
             }
         }
     }
@@ -91,13 +91,13 @@ proudctSelction.addEventListener('click', handleClickOnproudct);
 var totalClicks = 0;
 function handleClickOnproudct(event) {
     if (totalClicks < 25) {
-        alert("let see what is next!!");
+        // alert("let see what is next!!");
         if (event.target.id !== 'proudctSelction') {
-            console.log('hello',leftProduct);
+            // console.log('hello',leftProduct);
             
             if (event.target.id === 'left-images') {
                 leftProduct.clicks++;
-                console.log(leftProduct.clicks);
+                // console.log(leftProduct.clicks);
                 
             }
             else if (event.target.id === 'midlle-images') {
@@ -110,6 +110,7 @@ function handleClickOnproudct(event) {
             leftProduct.views++;
             midlleProduct.views++;
             rightProduct.views++;
+            updateProduct();
 
             render();
         }
@@ -119,6 +120,7 @@ function handleClickOnproudct(event) {
         proudctSelction.removeEventListener('click', handleClickOnproudct);
         selctionsResult()
         chartFun();
+      
 
     }
 }
@@ -128,7 +130,7 @@ function selctionsResult() {
     for (var i = 0; i < Product.all.length; i++) {
         var liRe = document.createElement('li');
         ulRe.appendChild(liRe)
-        Product.all[i].name = (Product.all[i].name).split(".", 1);
+        Product.all[i].name = (Product.all[i].name);
         liRe.textContent = `${Product.all[i].name} has ${Product.all[i].clicks} clicks and ${Product.all[i].views} views`
     }
 }
@@ -146,10 +148,10 @@ for ( var i = 0 ; i <Product.all.length; i++){
     clicksArr.push(Product.all[i].clicks);
      
     }
-    console.log('kdddddd',clicksArr);
+    // console.log('kdddddd',clicksArr);
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'pie',
         data: {
             labels:  productName,
             datasets: [{
@@ -214,3 +216,19 @@ for ( var i = 0 ; i <Product.all.length; i++){
         }
     });
 }
+function updateProduct (){
+    var productString = JSON.stringify(Product.all);
+    localStorage.setItem("productChoosed",productString);
+}
+
+function callProduct(){
+    var productString1 = localStorage.getItem("productChoosed");
+    console.log(productString1);
+    
+    if (productString1){
+        Product.all = JSON.parse(productString1);
+        selctionsResult()
+        chartFun();
+    }
+}  
+callProduct();
