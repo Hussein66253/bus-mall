@@ -79,6 +79,13 @@ function render() {
                          while (imagesShowed.includes(rightProduct)) {
                             rightProduct = Product.all[randomNumber(0, Product.all.length - 1)];
                         }
+                        imagesShowed.push(leftProduct);
+                        imagesShowed.push(midlleProduct);
+                        imagesShowed.push(rightProduct);
+                        while(imagesShowed.length > 2){
+                            imagesShowed.shift();
+                        }
+
                             
 
                 leftImage.setAttribute('src', leftProduct.imagePath);
@@ -164,7 +171,7 @@ for ( var v = 0 ; v <Product.all.length; v++){
     console.log('kdddddd',clicksArr);
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'pie',
         data: {
             labels:  productName,
             datasets: [{
