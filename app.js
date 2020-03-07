@@ -82,7 +82,7 @@ function render() {
                         imagesShowed.push(leftProduct);
                         imagesShowed.push(midlleProduct);
                         imagesShowed.push(rightProduct);
-                        while(imagesShowed.length > 2){
+                        while(imagesShowed.length > 3){
                             imagesShowed.shift();
                         }
 
